@@ -23,9 +23,10 @@
     %footer
 
     %script{type:'text/javascript', src:'http://code.jquery.com/jquery-1.6.2.js'}
-    %script{type:'text/javascript', src:'/js/underscore.js'}
-    %script{type:'text/javascript', src:'/js/backbone.js'}
-    %script{type:'text/javascript', src:'/js/app.js'}
+    -#%script{type:'text/javascript', src:'/js/underscore.js'}
+    -#%script{type:'text/javascript', src:'/js/backbone.js'}
+    -#%script{type:'text/javascript', src:'/compiled/js/app.js'}
+    = include_javascripts :app
 
     / Google Image Search API
     %script{type:'text/javascript', src:'https://www.google.com/jsapi?ABQIAAAAR5uwJwlGuunUMrr7NWNw-hT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTx21_7-aXTkBe80Ipt_vkMdX-plQ'}

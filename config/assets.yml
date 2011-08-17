@@ -1,0 +1,11 @@
+package_assets: on
+package_path: assets-compiled
+gzip_assets: false
+compress_assets: true
+javascript_compressor: uglifier
+
+javascripts:
+  app:
+    - public/js/underscore.js
+    - public/js/backbone.js
+    - public/compiled/js/app.js
