@@ -1,0 +1,33 @@
+!!! 5
+%html
+  %head
+    :css
+      #canvas {
+        border: 4px solid #ccc;
+      }
+
+  %body
+
+    %header
+
+    #main
+      #image-search-view
+        %input.query{type:'text'}
+        %ol.results
+
+      #new-meme-view
+        %canvas{width:500, height:400}
+        %input.top{type:'text'}
+        %input.bottom{type:'text'}
+
+    %footer
+
+    %script{type:'text/javascript', src:'http://code.jquery.com/jquery-1.6.2.js'}
+    %script{type:'text/javascript', src:'/js/underscore.js'}
+    %script{type:'text/javascript', src:'/js/backbone.js'}
+    %script{type:'text/javascript', src:'/js/app.js'}
+
+    / Google Image Search API
+    %script{type:'text/javascript', src:'https://www.google.com/jsapi?ABQIAAAAR5uwJwlGuunUMrr7NWNw-hT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTx21_7-aXTkBe80Ipt_vkMdX-plQ'}
+    :javascript
+      google.load('search', '1');

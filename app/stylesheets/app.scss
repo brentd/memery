@@ -1,0 +1,13 @@
+@import "compass/css3";
+
+$bg-noise: url(/images/bg.noise.overlay.png)
+$bg-neutral: #eeece9 $bg-noise;
+
+
+body {
+  background: $bg-neutral;
+}
+
+header {
+  background: $bg-noise, linear-gradient(#3d9ac1, #027caf);
+}
