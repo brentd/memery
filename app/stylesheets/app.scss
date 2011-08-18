@@ -175,6 +175,7 @@ input[type=text] {
     @include box-shadow(0 5px 10px rgba(#000, 0.5));
     margin: 20px auto;
     max-width: 800px;
+    max-height: 400px;
   }
   fieldset {
     width: 400px;
