@@ -1,11 +1,19 @@
-package_assets: on
+package_assets: off
 package_path: assets-compiled
-gzip_assets: false
 compress_assets: true
-javascript_compressor: uglifier
+gzip_assets: false
 
 javascripts:
   app:
-    - public/js/underscore.js
-    - public/js/backbone.js
-    - public/compiled/js/app.js
+    # vendor
+    - public/js/vendor/jquery.effects.core.js
+    - public/js/vendor/jquery.effects.fade.js
+    - public/js/vendor/jquery.animate-enhanced.js
+    - public/js/vendor/underscore.js
+    - public/js/vendor/backbone.js
+    # app
+    - public/js/compiled/app.js
+
+stylesheets:
+  app:
+    - public/css/compiled/app.css

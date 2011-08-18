@@ -1,32 +1,34 @@
 !!! 5
 %html
   %head
-    :css
-      #canvas {
-        border: 4px solid #ccc;
-      }
+    = include_stylesheets :app
 
   %body
-
     %header
-
+      .burst-container
+        .burst
+      %img.logo{src:'/images/logo.png'}
+      %button#create-button.magical-button create lulz
+    #create-meme{style:'display:none'}
     #main
-      #image-search-view
-        %input.query{type:'text'}
-        %ol.results
+      %ul#meme-list
 
-      #new-meme-view
-        %canvas{width:500, height:400}
-        %input.top{type:'text'}
-        %input.bottom{type:'text'}
-
-    %footer
-
-    %script{type:'text/javascript', src:'http://code.jquery.com/jquery-1.6.2.js'}
-    -#%script{type:'text/javascript', src:'/js/underscore.js'}
-    -#%script{type:'text/javascript', src:'/js/backbone.js'}
-    -#%script{type:'text/javascript', src:'/compiled/js/app.js'}
+    / App scripts
+    %script{type:'text/javascript', src:'https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js'}
     = include_javascripts :app
+
+    :javascript
+      Memery.data.memes = #{@memes.to_json(:methods => :url)};
+
+    / Templates
+    %script#image-search-template{type:'text/template'}
+      %input.query{type:'text', placeholder:'Google Image Search'}
+      %table.results
+    %script#meme-editor-template{type:'text/template'}
+      %canvas{width:500, height:400}
+      %fieldset
+        %input.top{type:'text', placeholder:'Top Text'}
+        %input.bottom{type:'text', placeholder:'Bottom Text'}
 
     / Google Image Search API
     %script{type:'text/javascript', src:'https://www.google.com/jsapi?ABQIAAAAR5uwJwlGuunUMrr7NWNw-hT2yXp_ZAY8_ufC3CFXhHIE1NvwkxTx21_7-aXTkBe80Ipt_vkMdX-plQ'}

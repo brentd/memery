@@ -1,14 +1,190 @@
+@import "compass/reset";
 @import "compass/css3";
+@import "compass/css3/images";
 
+$c-neutral: #eeece9;
 $bg-noise: url(/images/bg.noise.overlay.png);
-$bg-neutral: #eeece9 $bg-noise;
+$bg-neutral: $c-neutral $bg-noise;
+$bg-burst: url(/images/burst.png);
 
 
 body {
   background: $bg-neutral;
+  font-family: "Arial Rounded MT Bold", Arial, sans-serif;
 }
 
 header {
-  background: $bg-noise, linear-gradient(#3d9ac1, #027caf);
-  height: 300px;
+  @include background-image($bg-noise, linear-gradient(#3d9ac1, #027caf));
+  height: 200px;
+  position: relative;
+  .logo {
+    width: 334px;
+    height: 137px;
+    position: absolute;
+    top: 5px;
+    left: 50%;
+    margin-left: -167px;
+  }
+  .burst-container {
+    overflow: hidden;
+    position: absolute;
+    height: 200px;
+    width: 100%;
+  }
+  .burst {
+    background: $bg-burst;
+    width: 2828px;
+    height: 2828px;
+    position: absolute;
+    left: 50%;
+    margin-left: -1414px;
+    top: -1150px;
+    opacity: 0.1;
+    -webkit-animation-name: burstRotate;
+    -webkit-animation-duration:10s;
+    -webkit-animation-iteration-count:infinite;
+    -webkit-animation-timing-function:linear;
+  }
+  .magical-button {
+    z-index: 100;
+    position: absolute;
+    bottom: -25px;
+    width: 200px;
+    height: 55px;
+    left: 50%;
+    margin-left: -100px;
+    border: none;
+    color: #fff;
+    font-size: 31px;
+    font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+    cursor: pointer;
+    @include text-shadow(0 -1px rgba(#000, 0.5));
+    @include border-radius(18px);
+    @include background-image($bg-noise, linear-gradient(#9bc92b, #5d8c15));
+    @include box-shadow(0 5px 0 #3f610b, 0 0 4px rgba(#e1ff85, 0.5) inset, 0 8px 4px rgba(#000, 0.2));
+    @include transition(0.1s);
+    &:hover {
+      @include background-image($bg-noise, linear-gradient(#9bc92b + #111, #5d8c15 + #111));
+      @include box-shadow(0 5px 0 #3f610b, 0 0 4px rgba(#e1ff85, 0.5) inset, 0 8px 4px rgba(#000, 0.2), 0 0 80px #e1ff85);
+    }
+    &:active, &.active {
+      bottom: -29px;
+      @include box-shadow(0 1px 0 #3f610b, 0 0 4px rgba(#e1ff85, 0.5) inset, 0 2px 4px rgba(#000, 0.2), 0 0 80px #e1ff85);
+    }
+  }
+}
+
+@-webkit-keyframes burstRotate {
+  from {-webkit-transform: translateZ(0) rotate(0deg);}
+  to {-webkit-transform: translateZ(0) rotate(30deg);}
+}
+
+input[type=text] {
+  font-size: 25px;
+  font-weight: bold;
+  display: block;
+  margin: 0 auto;
+  font-family: "Arial Rounded MT Bold", Arial, sans-serif;
+  color: #555;
+  padding: 5px;
+}
+
+#main {
+  margin: 0 auto;
+  width: 960px;
+}
+
+#meme-list {
+  margin: 80px 0;
+  li {
+    float: left;
+    width: 200px;
+    height: 200px;
+    padding: 20px;
+    text-align: center;
+  }
+  img {
+    max-width: 200px;
+    max-height: 200px;
+    border: 3px solid #fff;
+    @include box-shadow(0 5px 20px rgba(#000, 0.5));
+  }
+}
+
+
+#create-meme {
+  width: 900px;
+  min-height: 500px;
+  padding: 60px 20px;
+  background: $c-neutral + #222;
+  position: absolute;
+  left: 50%;
+  margin-left: -470px;
+  margin-top: -10px;
+  border: 3px solid $c-neutral - #111;
+  @include border-radius(12px);
+  @include box-shadow(0 5px 20px rgba(#000, 0.5));
+  &:before {
+    background: $c-neutral + #222;
+    content: ' '; // fuck yes, this is happening.
+    width: 210px;
+    height: 23px;
+    @include border-top-radius(24px);
+    position: absolute;
+    left: 50%;
+    margin-left: -111px;
+    top: -26px;
+    border: 3px solid $c-neutral - #111;
+    border-bottom: none;
+  }
+}
+
+#image-search {
+  .query {
+    width: 400px;
+  }
+  .results {
+    margin: 20px 0;
+    width: 900px;
+    td {
+      width: 200px;
+      /*height: 150px;*/
+      padding: 9px;
+      img {
+        border: 3px solid #ddd;
+        width: 100%;
+        max-height: 400px;
+      }
+      &:hover {
+        cursor: pointer;
+        img {
+          -webkit-transform: scale(1.3);
+          @include box-shadow(0 5px 10px rgba(#000, 0.5));
+          border-color: #fff;
+          @include transition(0.1s);
+        }
+      }
+    }
+  }
+}
+
+#meme-editor {
+  canvas {
+    display: block;
+    border: 5px solid #fff;
+    @include box-shadow(0 5px 10px rgba(#000, 0.5));
+    margin: 20px auto;
+    max-width: 800px;
+  }
+  fieldset {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #eee;
+    input {
+      display: block;
+      width: 380px;
+      margin: 10px 0;
+    }
+  }
 }

@@ -1,2 +1,6 @@
 .sass-cache
-public/compiled
+public/js/compiled
+public/css/compiled
+public/assets-compiled
+public/uploads
+db/*.sqlite3

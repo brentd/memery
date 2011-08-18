@@ -6,53 +6,46 @@ require 'sass/plugin/rack'
 require 'barista'
 require 'jammit-sinatra'
 require 'padrino-helpers'
+require 'active_record'
 require 'open-uri'
 require 'base64'
 
-configure do
-  Sinatra.register Padrino::Helpers
-
-  # Compass
-  Compass.configuration.tap do |c|
-    c.sass_dir = 'app/stylesheets'
-    c.css_dir  = 'public/compiled/css'
-  end
-  Compass.configure_sass_plugin!
-  use Sass::Plugin::Rack
-
-  # Barista
-  Barista.configure do |c|
-    c.root        = File.join settings.root, 'app', 'coffeescripts'
-    c.output_root = File.join settings.root, 'public', 'compiled', 'js'
-  end
-  use Barista::Filter
-
-  # Jammit
-  Jammit.load_configuration(File.join settings.root, 'config', 'assets.yml')
-  Sinatra.register Jammit
-end
-
-set :views, 'app/views'
+require './config/config'
 
 get '/' do
+  @memes = Meme.limit(20).all
   haml :index
 end
 
-post '/' do
-  if base64 = params[:base64]
-    base64.sub!('data:image/png;base64,', '')
-    image = Base64.decode64 base64
-    File.open('image.png', 'w') {|f| f.write(image)}
-  end
+get '/memes' do
+  content_type :json
+  Meme.desc(:id).limit(20).all.to_json
 end
 
-get '/getimage' do
+post '/memes' do
+  content_type :json
+  attrs = JSON.parse request.body.read
+  Meme.create!(attrs).to_json(:methods => :url)
+end
+
+get '/proxyimage' do
   content_type 'image/png'
   open params[:url]
 end
 
 
-#get '/css/:name.css' do
-  #content_type 'text/css', :charset => 'utf-8'
-  #sass(:"app/stylesheets/#{params[:name]}", Compass.sass_engine_options)
-#end
+class Meme < ActiveRecord::Base
+  attr_accessor :base64
+
+  def url
+    "/uploads/memes/#{id}.png" if persisted?
+  end
+
+  after_save do
+    if @base64
+      base64.sub!('data:image/png;base64,', '')
+      image = Base64.decode64 base64
+      File.open("public/uploads/memes/#{id}.png", 'w') {|f| f.write(image)}
+    end
+  end
+end
