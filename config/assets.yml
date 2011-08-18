@@ -1,4 +1,4 @@
-package_assets: off
+package_assets: on
 package_path: assets-compiled
 compress_assets: true
 gzip_assets: false
@@ -12,7 +12,7 @@ javascripts:
     - public/js/vendor/underscore.js
     - public/js/vendor/backbone.js
     # app
-    - public/js/compiled/app.js
+    - public/js/compiled/**/*.js
 
 stylesheets:
   app:

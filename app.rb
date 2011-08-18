@@ -13,13 +13,13 @@ require 'base64'
 require './config/config'
 
 get '/' do
-  @memes = Meme.limit(20).all
+  @memes = Meme.order('id DESC').limit(20).all
   haml :index
 end
 
 get '/memes' do
   content_type :json
-  Meme.desc(:id).limit(20).all.to_json
+  Meme.order('id DESC').limit(20).all.to_json(:methods => :url)
 end
 
 post '/memes' do
