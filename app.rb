@@ -1,14 +1,5 @@
 require 'bundler/setup'
 require 'sinatra'
-require 'haml'
-require 'compass'
-require 'sass/plugin/rack'
-require 'barista'
-require 'jammit-sinatra'
-require 'padrino-helpers'
-require 'active_record'
-require 'open-uri'
-require 'base64'
 
 require './config/config'
 

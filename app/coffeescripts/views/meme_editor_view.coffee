@@ -28,7 +28,7 @@ class Memery.MemeEditorView extends Backbone.View
     @model.set base64: @canvas.toDataURL()
     @model.save {},
       success: => Memery.memes.add @model
-
+   
   loadImage: ->
     @setDimensions()
     if @model.has 'image_url'

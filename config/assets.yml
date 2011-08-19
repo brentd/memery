@@ -1,4 +1,4 @@
-package_assets: off
+package_assets: on
 package_path: assets-compiled
 compress_assets: true
 gzip_assets: false

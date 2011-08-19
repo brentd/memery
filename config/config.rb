@@ -1,10 +1,21 @@
+require 'haml'
+require 'compass'
+require 'sass/plugin/rack'
+require 'barista'
+require 'jammit-sinatra'
+require 'padrino-helpers'
+require 'active_record'
+require 'open-uri'
+require 'base64'
+
+
 configure do
   set :views, 'app/views'
   set :database, 'db/db.sqlite3'
 
   ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: settings.database)
   ActiveRecord::Base.include_root_in_json = false
-  
+
   Sinatra.register Padrino::Helpers
 
   # Compass
