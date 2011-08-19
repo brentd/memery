@@ -7,6 +7,7 @@ require 'padrino-helpers'
 require 'active_record'
 require 'open-uri'
 require 'base64'
+require 'fileutils'
 
 
 configure do

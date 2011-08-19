@@ -19,6 +19,8 @@ post '/memes' do
   Meme.create!(attrs).to_json(:methods => :url)
 end
 
+# Workaround for same-domain security policy with canvas, lol
+# TODO: this is a terrible idea
 get '/proxyimage' do
   content_type 'image/png'
   open params[:url]
@@ -33,9 +35,10 @@ class Meme < ActiveRecord::Base
   end
 
   after_save do
-    if @base64
+    if base64
       base64.sub!('data:image/png;base64,', '')
       image = Base64.decode64 base64
+      FileUtils.mkdir_p 'public/uploads/memes'
       File.open("public/uploads/memes/#{id}.png", 'w') {|f| f.write(image)}
     end
   end
